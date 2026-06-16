@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6">
                 <form asp-action="SearchByDepartment" method="get" class="d-flex">
-                    <input type="text" name="departmentName" class="form-control me-2" placeholder="Search by department name..." />
+                    <input type="text" name="departmentName" class="form-control me-2" placeholder="Search by department name..." value="@ViewBag.SearchDepartment" />
                     <button type="submit" class="btn btn-info text-white">
                         <i class="bi bi-search"></i> Search by Dept
                     </button>

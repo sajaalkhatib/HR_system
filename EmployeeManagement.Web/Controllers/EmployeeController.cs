@@ -152,7 +152,7 @@ public class EmployeeController : Controller
         }
 
         var employees = await _employeeService.SearchByDepartmentAsync(departmentName);
-        ViewBag.SearchTerm = departmentName;
+        ViewBag.SearchDepartment = departmentName;
         return View("Index", employees);
     }
 

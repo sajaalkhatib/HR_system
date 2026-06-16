@@ -1,6 +1,7 @@
 using EmployeeManagement.Application.DTOs;
 using EmployeeManagement.Application.Interfaces;
 using EmployeeManagement.Domain.Entities;
+using EmployeeManagement.Domain.Exceptions;
 using EmployeeManagement.Domain.Interfaces;
 
 namespace EmployeeManagement.Application.Services;
@@ -36,6 +37,11 @@ public class EmployeeService : IEmployeeService
         if (department is null)
             throw new KeyNotFoundException($"Department with ID {createEmployeeDto.DepartmentId} not found.");
 
+        // Check email uniqueness
+        var existingEmployee = await _employeeRepository.GetByEmailAsync(createEmployeeDto.Email);
+        if (existingEmployee is not null)
+            throw new InvalidEmployeeException($"An employee with email '{createEmployeeDto.Email}' already exists.");
+
         var employee = new Employee(
             createEmployeeDto.FullName,
             createEmployeeDto.Email,
@@ -57,6 +63,11 @@ public class EmployeeService : IEmployeeService
         var department = await _departmentRepository.GetByIdAsync(updateEmployeeDto.DepartmentId);
         if (department is null)
             throw new KeyNotFoundException($"Department with ID {updateEmployeeDto.DepartmentId} not found.");
+
+        // Check email uniqueness (exclude current employee)
+        var existingEmployee = await _employeeRepository.GetByEmailAsync(updateEmployeeDto.Email);
+        if (existingEmployee is not null && existingEmployee.EmployeeId != updateEmployeeDto.EmployeeId)
+            throw new InvalidEmployeeException($"An employee with email '{updateEmployeeDto.Email}' already exists.");
 
         employee.UpdateDetails(
             updateEmployeeDto.FullName,

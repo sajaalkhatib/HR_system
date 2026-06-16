@@ -11,4 +11,5 @@ public interface IEmployeeRepository
     Task DeleteAsync(Employee employee);
     Task<IEnumerable<Employee>> SearchAsync(string searchTerm);
     Task<IEnumerable<Employee>> SearchByDepartmentAsync(string departmentName);
+    Task<Employee?> GetByEmailAsync(string email);
 }

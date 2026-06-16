@@ -64,6 +64,16 @@ public class EmployeeRepository : IEmployeeRepository
             .ToListAsync();
     }
 
+    public async Task<Employee?> GetByEmailAsync(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return null;
+
+        return await _context.Employees
+            .Include(e => e.Department)
+            .FirstOrDefaultAsync(e => e.Email.ToLower() == email.Trim().ToLower());
+    }
+
     public async Task<IEnumerable<Employee>> SearchByDepartmentAsync(string departmentName)
     {
         if (string.IsNullOrWhiteSpace(departmentName))

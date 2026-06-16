@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-primary shadow-sm">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-people-fill text-primary" style="font-size: 4rem;"></i>
+                <h1 class="display-5 fw-bold text-primary mt-3">Employee Management System</h1>
+                <p class="lead text-muted">Manage your employees and departments efficiently</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <a asp-controller="Employee" asp-action="Index" class="text-decoration-none">
+            <div class="card border-primary shadow-sm h-100">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-person-badge-fill text-primary" style="font-size: 3rem;"></i>
+                    <h3 class="card-title mt-3">Employees</h3>
+                    <p class="card-text text-muted">View, add, edit, and manage employees</p>
+                    <span class="btn btn-primary">Manage Employees <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a asp-controller="Department" asp-action="Index" class="text-decoration-none">
+            <div class="card border-success shadow-sm h-100">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-building-fill text-success" style="font-size: 3rem;"></i>
+                    <h3 class="card-title mt-3">Departments</h3>
+                    <p class="card-text text-muted">View and manage departments</p>
+                    <span class="btn btn-success">Manage Departments <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
